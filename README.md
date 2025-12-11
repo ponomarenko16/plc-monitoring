@@ -2,6 +2,8 @@
 
 A real-time variable trend visualizer for industrial PLC systems. This application allows automation engineers to monitor how PLC variables change over time to debug control logic and tune system performance.
 
+**Live preview**: https://plc-monitoring.vercel.app/
+
 ## Setup & Run Instructions
 
 ### Prerequisites
