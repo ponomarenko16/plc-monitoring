@@ -1,0 +1,17 @@
+<div class="rounded-xl border border-slate-800 bg-slate-800/80 p-4 shadow-lg shadow-slate-900/50">
+  <div class="mb-3 flex items-center justify-between">
+    <div>
+      <p class="text-xs uppercase tracking-wide text-slate-400">Live telemetry</p>
+      <h2 class="text-lg font-semibold text-slate-100">PLC Variables Chart</h2>
+    </div>
+    <span class="text-xs font-medium text-emerald-400">Realtime</span>
+  </div>
+  <highcharts-chart
+    (chartInstance)="onChartInstance($event)"
+    #chartRef
+    [options]="chartOptions"
+    [oneToOne]="true"
+    class="block h-[440px] w-full"
+  />
+  <!-- [(update)]="updateFlag" -->
+</div>

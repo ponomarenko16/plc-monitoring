@@ -1,0 +1,33 @@
+@if (vm(); as vm) {
+<div class="min-h-screen bg-slate-900 px-4 py-6 text-slate-100 sm:px-6 lg:px-8">
+  <div class="mx-auto flex max-w-7xl flex-col gap-6">
+    <header class="flex flex-col gap-1">
+      <p class="text-xs uppercase tracking-wide text-slate-400">Monitoring</p>
+      <h1 class="text-2xl font-semibold">PLC Dashboard</h1>
+    </header>
+
+    <div class="flex flex-col gap-3">
+      <div class="flex w-full items-center justify-end">
+        <plcm-frequency-selector
+          class="shrink-0"
+          [value]="vm.frequency"
+          (select)="setFrequency($event)"
+        />
+      </div>
+
+      <plcm-monitoring-chart
+        class="w-full"
+        [dataStream]="vm.plcValuesStream"
+        [enabledVariables]="vm.enabledVariables"
+      />
+    </div>
+
+    <plcm-monitoring-variables
+      class="w-full"
+      [variables]="vm.variables"
+      [values]="vm.plcValuesStream"
+      (toggleVariable)="toggleVariable($event)"
+    />
+  </div>
+</div>
+}
