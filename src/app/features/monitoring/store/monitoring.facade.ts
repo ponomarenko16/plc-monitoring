@@ -8,18 +8,16 @@ export class MonitoringFacade {
   private variablesStore = inject(VariablesStore);
   private dataStore = inject(DataStore);
 
-  public vm = computed(() => {
-    return {
-      variables: this.variablesStore.variables(),
-      enabledVariables: this.variablesStore.enabledVariables(),
-      plcValuesStream: this.dataStore.dataStream.value(),
-      frequency: this.dataStore.frequency(),
-    };
-  });
+  public vm = computed(() => ({
+    variables: this.variablesStore.variables(),
+    enabledVariables: this.variablesStore.enabledVariables(),
+    plcValues: this.dataStore.plcValues(),
+    frequency: this.dataStore.frequency(),
+  }));
 
   constructor() {
     effect(() => {
-      this.dataStore.initStream(this.variablesStore.variables());
+      this.dataStore.setVariables(this.variablesStore.variables());
     });
   }
 
@@ -27,7 +25,7 @@ export class MonitoringFacade {
     this.variablesStore.toggleVariable(id);
   }
 
-  setFrequency(freq: FrequencyHz) {
-    this.dataStore.setFrequency(freq);
+  setFrequency(frequency: FrequencyHz) {
+    this.dataStore.setFrequency(frequency);
   }
 }

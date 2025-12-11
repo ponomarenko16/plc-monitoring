@@ -1,32 +1,34 @@
 import { Injectable } from '@angular/core';
-import { VariableType } from '../models/plc-varibale';
+import { VariableType } from '../models/plc-variable';
 
 @Injectable({ providedIn: 'root' })
 export class PlcDataService {
-  getValue(value: number, variableType: VariableType): number {
-    if (variableType === 'BOOL') {
-      return this.getBoolValue(value);
-    } else if (variableType === 'INT') {
-      return this.getIntValue(value);
-    } else if (variableType === 'REAL') {
-      return this.getRealValue(value);
+  getValue(previousValue: number, variableType: VariableType): number {
+    switch (variableType) {
+      case 'BOOL':
+        return this.getBoolValue(previousValue);
+      case 'INT':
+        return this.getIntValue(previousValue);
+      case 'REAL':
+        return this.getRealValue(previousValue);
+      default:
+        return previousValue;
     }
-    return value;
   }
 
-  getBoolValue(prevState: number /** 0 or 1 */): number {
+  getBoolValue(previousState: number /** 0 or 1 */): number {
     const TOGGLE_PROBABILITY = 0.05;
 
     if (Math.random() < TOGGLE_PROBABILITY) {
-      return prevState === 0 ? 1 : 0;
+      return previousState === 0 ? 1 : 0;
     }
 
-    return prevState;
+    return previousState;
   }
 
-  getIntValue(prevState: number = 0): number {
+  getIntValue(previousValue: number = 0): number {
     const baseIncrement = 1 + Math.floor(Math.random() * 3); // 1..3
-    let incremented = prevState + baseIncrement;
+    let incremented = previousValue + baseIncrement;
 
     const SETPOINT_CHANGE_PROBABILITY = 0.1;
 
@@ -38,8 +40,8 @@ export class PlcDataService {
     return incremented;
   }
 
-  getRealValue(prevState: number = 0): number {
-    let ticked = prevState + 1;
+  getRealValue(previousValue: number = 0): number {
+    let ticked = previousValue + 1;
 
     const base = 50;
     const amplitude = 10;

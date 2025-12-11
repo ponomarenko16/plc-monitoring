@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { PlcVariable } from '../models/plc-varibale';
+import { PlcVariable } from '../models/plc-variable';
 
 @Injectable()
 export class VariablesStore {

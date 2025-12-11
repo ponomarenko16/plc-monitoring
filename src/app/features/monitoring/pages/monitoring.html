@@ -10,14 +10,14 @@
       <div class="flex w-full items-center justify-end">
         <plcm-frequency-selector
           class="shrink-0"
-          [value]="vm.frequency"
-          (select)="setFrequency($event)"
+          [selectedFrequency]="vm.frequency"
+          (frequencySelected)="setFrequency($event)"
         />
       </div>
 
       <plcm-monitoring-chart
         class="w-full"
-        [dataStream]="vm.plcValuesStream"
+        [plcValues]="vm.plcValues"
         [enabledVariables]="vm.enabledVariables"
       />
     </div>
@@ -25,7 +25,7 @@
     <plcm-monitoring-variables
       class="w-full"
       [variables]="vm.variables"
-      [values]="vm.plcValuesStream"
+      [plcValues]="vm.plcValues"
       (toggleVariable)="toggleVariable($event)"
     />
   </div>

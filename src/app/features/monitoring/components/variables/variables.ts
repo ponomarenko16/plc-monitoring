@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, effect, input, output } from '@angular/core';
 import { PlcValue } from '../../models/plc-value';
-import { PlcVariable } from '../../models/plc-varibale';
+import { PlcVariable } from '../../models/plc-variable';
 import { PlcValuePipe } from './plc-value.pipe';
 
 const MAX_SELECTED_VARIABLES = 4;
@@ -14,11 +14,11 @@ const MAX_SELECTED_VARIABLES = 4;
 })
 export class VariablesComponent {
   variables = input<PlcVariable[]>([]);
-  values = input<Map<string, PlcValue>>();
+  plcValues = input<Map<string, PlcValue>>();
   toggleVariable = output<string>();
-  selectedVariables = computed(() => this.variables().filter((v) => v.enabled));
-  isMaxSelectedVariables = computed(
-    () => this.selectedVariables().length >= MAX_SELECTED_VARIABLES
+  enabledVariables = computed(() => this.variables().filter((v) => v.enabled));
+  hasReachedSelectionLimit = computed(
+    () => this.enabledVariables().length >= MAX_SELECTED_VARIABLES
   );
 
   toggle(id: string) {

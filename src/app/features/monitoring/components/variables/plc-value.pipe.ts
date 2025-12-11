@@ -6,10 +6,12 @@ import { PlcValue } from '../../models/plc-value';
 })
 export class PlcValuePipe implements PipeTransform {
   transform(valueId: string, values: Map<string, PlcValue> | undefined): string {
-    const placeholder = '-';
-    if (!values) return placeholder;
-    const latest = values.get(valueId)?.value;
-    if (!values.has(valueId) || !latest) return placeholder;
-    return String(latest);
+    const noValuePlaceholder = '-';
+    if (!values) return noValuePlaceholder;
+
+    const plcValue = values.get(valueId);
+    if (!plcValue) return noValuePlaceholder;
+
+    return String(plcValue.value);
   }
 }

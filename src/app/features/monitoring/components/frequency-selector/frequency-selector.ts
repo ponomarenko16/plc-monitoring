@@ -15,16 +15,16 @@ type FrequencyOption = {
   styleUrls: ['./frequency-selector.scss'],
 })
 export class FrequencySelectorComponent {
-  value = input<FrequencyHz>(10);
-  select = output<FrequencyHz>();
+  selectedFrequency = input<FrequencyHz>(10);
+  frequencySelected = output<FrequencyHz>();
 
-  readonly options: FrequencyOption[] = [
+  readonly frequencyOptions: FrequencyOption[] = [
     { value: 2, label: '2 Hz' },
     { value: 10, label: '10 Hz' },
     { value: 20, label: '20 Hz' },
   ];
 
-  onSelect(option: FrequencyHz) {
-    this.select.emit(option);
+  onSelectFrequency(option: FrequencyHz) {
+    this.frequencySelected.emit(option);
   }
 }

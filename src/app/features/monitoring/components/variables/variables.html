@@ -7,11 +7,11 @@
     </div>
     <div class="text-right">
       <span class="text-xs text-slate-400">
-        {{ variables().length }} items {{ selectedVariables().length }} selected
+        {{ variables().length }} items {{ enabledVariables().length }} selected
       </span>
       <br />
       <span class="text-xs text-red-400">
-        {{ isMaxSelectedVariables() ? 'Max selected variables reached' : '' }}
+        {{ hasReachedSelectionLimit() ? 'Max selected variables reached' : '' }}
       </span>
     </div>
   </header>
@@ -23,7 +23,7 @@
     >
       <div class="flex items-center gap-3">
         <input
-          [disabled]="isMaxSelectedVariables() && !variable.enabled"
+          [disabled]="hasReachedSelectionLimit() && !variable.enabled"
           type="checkbox"
           [checked]="variable.enabled"
           (change)="toggle(variable.id)"
@@ -40,7 +40,7 @@
         </div>
       </div>
       <span class="text-sm font-semibold text-sky-300">
-        {{ variable.id | plcValue : values() }}
+        {{ variable.id | plcValue : plcValues() }}
         @if (variable.unit) {
         <span class="text-xs text-slate-400 ml-1">{{ variable.unit }}</span>
         }
